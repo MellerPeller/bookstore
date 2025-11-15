@@ -2,67 +2,22 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <title>Boklista (Enkel SQL)</title>
+    <title>Läs Böcker - Bokhandel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 40px;
-            background-color: #f4f7f6;
-            color: #333;
-        }
-        h1 {
-            color: #00796b;
-            border-bottom: 2px solid #00796b;
-            padding-bottom: 10px;
-        }
-        .book-list {
-            list-style: none;
-            padding: 0;
-        }
-        .book-item {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            margin-bottom: 12px;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #388e3c;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .author {
-            font-style: italic;
-            color: #555;
-            font-size: 0.9em;
-        }
-        .error-message {
-            color: #d32f2f;
-            background-color: #ffebee;
-            padding: 10px;
-            border: 1px solid #d32f2f;
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>📚 Boklista (Hämtad med enkel JOIN)</h1>
+    <nav>
+        <ul>
+            <li><a href="index.php" class="active">Lista Böcker</a></li>
+            <li><a href="add_book.php">Ny Bok</a></li>
+            <li><a href="authors.php">Lista Författare</a></li>
+            <li><a href="add_author.php">Ny Författare</a></li>
+        </ul>
+    </nav>
 
-    <p><a href="add_book.php" style="
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #f44336; /* Röd knapp */
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    ">➕ Lägg till ny bok</a></p>
+    <h1>📚 Böcker</h1>
     
     <?php
     // Databasanslutning
@@ -109,7 +64,7 @@
         echo '</ul>';
 
         if ($book_count == 0) {
-             echo '<p>Inga böcker hittades i databasen.</p>';
+             echo '<p class="empty-message">Inga böcker hittades i databasen.</p>';
         }
 
 

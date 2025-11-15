@@ -71,23 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <title>Lägg till Ny Bok</title>
-    <style>
-        body { font-family: sans-serif; margin: 40px; background-color: #f4f7f6; }
-        h1 { color: #f44336; border-bottom: 2px solid #f44336; padding-bottom: 10px; }
-        form { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 500px; }
-        label { display: block; margin-top: 15px; font-weight: bold; color: #555; }
-        input[type="text"] { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #f44336; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; margin-top: 25px; font-size: 1em; }
-        .back-link { display: block; margin-top: 20px; color: #00796b; text-decoration: none; font-weight: bold; }
-        .success { background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
-        .error { background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
-    </style>
+    <title>Skapa Bok - Bokhandel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Lägg till Ny Bok</h1>
-    <a href="index.php" class="back-link">← Tillbaka till Boklistan</a>
+    <nav>
+        <ul>
+            <li><a href="index.php">Lista Böcker</a></li>
+            <li><a href="add_book.php" class="active">Ny Bok</a></li>
+            <li><a href="authors.php">Lista Författare</a></li>
+            <li><a href="add_author.php">Ny Författare</a></li>
+        </ul>
+    </nav>
+
+    <h1>➕ Lägg till ny bok</h1>
 
     <?php if ($success): ?>
         <div class="success"><?php echo $success; ?></div>
