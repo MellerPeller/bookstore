@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     <!-- När användaren trycker på "Spara Bok" anropas add_book.php igen, men denna gång med POST-data -->
     <!-- Detta är anledningen till att vi kan kontrollera $_SERVER['REQUEST_METHOD'] === 'POST' ovan -->
     <form method="POST">
-        <label for="isbn">ISBN (Viktigt!):</label>
+        <label for="isbn">ISBN:</label>
         <input type="text" id="isbn" name="isbn" required maxlength="20">
 
         <label for="title">Titel:</label>
