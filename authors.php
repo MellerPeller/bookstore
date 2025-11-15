@@ -37,17 +37,9 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         // Steg 3: Skriv SQL-queryn
-        // Vi vill hämta alla författare från authors-tabellen
-        // ORDER BY sorterar resultatet: först efter efternamn, sedan efter förnamn
+        // Hämta alla författare från authors-tabellen
         $sql = "
-            SELECT 
-                author_id,
-                name_first, 
-                name_last
-            FROM 
-                authors
-            ORDER BY
-                name_last ASC, name_first ASC
+            -- TODO: Skriv SQL-queryn för att hämta alla författare från authors-tabellen
         ";
         
         // Steg 4: Kör SQL-queryn mot databasen
