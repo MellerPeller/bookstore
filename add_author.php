@@ -19,10 +19,10 @@ try {
 // Hantera formulär när användaren skickar in det
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     
-    // Hämta och rensa inmatning (Säkerhet!)
-    // FILTER_SANITIZE_STRING tar bort potentiellt farliga HTML-tecken
-    $firstName = filter_input(INPUT_POST, 'name_first', FILTER_SANITIZE_STRING);
-    $lastName = filter_input(INPUT_POST, 'name_last', FILTER_SANITIZE_STRING);
+    // Hämta inmatning fråm formuläret
+    // OBS: osäker metod, använd inte i riktiga projekt!
+    $firstName = $_POST['name_first'];
+    $lastName = $_POST['name_last'];
 
     // Validering: Kontrollera om obligatoriska fält är ifyllda
     if (empty($lastName)) {
@@ -32,8 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
             // Lägg till författaren i databasen
             // TODO: Skriv SQL-queryn för att lägga till en ny författare i authors-tabellen
             $sql = "--TODO";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$firstName, $lastName]);
+        
+            // Kör SQL-queryn mot databasen
+            // OBS: osäker metod, använd inte i riktiga projekt!
+            $pdo->query($sql);
             
             $fullName = trim($firstName . ' ' . $lastName);
             $success = "Författaren '{$fullName}' lades till i databasen!";

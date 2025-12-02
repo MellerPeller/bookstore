@@ -25,19 +25,19 @@
     <h1>📚 Böcker</h1>
     
     <?php
-    // Steg 1: Förbered databasanslutningen
     // DSN (Data Source Name) beskriver var databasen finns och vilken databas vi vill använda
     $dsn = "mysql:host=127.0.0.1;dbname=bookstore;charset=utf8mb4";
     $user = 'root';
     $pass = ''; // Tomt lösenord (standard i XAMPP)
 
     try {
-        // Steg 2: Skapa anslutning till databasen
+        // Skapa anslutning till databasen
         // new PDO skapar ett objekt som låter oss prata med databasen
         // PDO står för "PHP Data Objects" - ett sätt att arbeta med databaser i PHP
         $pdo = new PDO($dsn, $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Steg 3: Skriv SQL-queryn
+        // Skriv SQL-queryn
         // Vi vill hämta boktitlar och författarnamn från databasen
         // JOIN används för att kombinera data från två tabeller (books och authors)
         $sql = "
@@ -55,11 +55,11 @@
                 b.title ASC
         ";
         
-        // Steg 4: Kör SQL-queryn mot databasen
+        // Kör SQL-queryn mot databasen
         // query() skickar vår SQL-query till databasen och får tillbaka resultatet
         $stmt = $pdo->query($sql);
 
-        // Steg 5: Visa resultatet på webbsidan
+        // Visa resultatet på webbsidan
         echo '<ul class="book-list">';
         
         // Loopa igenom varje rad i resultatet
@@ -67,7 +67,9 @@
         // FETCH_ASSOC betyder att vi får data som en array med kolumnnamn som nycklar
         $book_count = 0;
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
             $book_count++;
+            
             // Sätt ihop förnamn och efternamn till ett fullständigt namn
             $full_author_name = htmlspecialchars($row['name_first']) . ' ' . htmlspecialchars($row['name_last']);
             

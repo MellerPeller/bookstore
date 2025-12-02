@@ -25,27 +25,27 @@
     <h1>✍️ Författare</h1>
     
     <?php
-    // Steg 1: Förbered databasanslutningen
+    // Förbered databasanslutningen
     $dsn = "mysql:host=127.0.0.1;dbname=bookstore;charset=utf8mb4";
     $user = 'root';
     $pass = '';
 
     try {
-        // Steg 2: Skapa anslutning till databasen
+        // Skapa anslutning till databasen
         // new PDO skapar ett objekt som låter oss prata med databasen
         $pdo = new PDO($dsn, $user, $pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        // Steg 3: Skriv SQL-queryn
+        // Skriv SQL-queryn
         // Hämta alla författare från authors-tabellen
         $sql = "
             -- TODO: Skriv SQL-queryn för att hämta alla författare från authors-tabellen
         ";
-        
-        // Steg 4: Kör SQL-queryn mot databasen
+
+        // Kör SQL-queryn mot databasen
         $stmt = $pdo->query($sql);
 
-        // Steg 5: Visa resultatet på webbsidan
+        // Visa resultatet på webbsidan
         echo '<ul class="author-list">';
         
         // Loopa igenom varje rad i resultatet

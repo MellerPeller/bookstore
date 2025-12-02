@@ -1,5 +1,5 @@
 <?php
-// Steg 1: Förbered databasanslutningen
+// Förbered databasanslutningen
 $dsn = "mysql:host=127.0.0.1;dbname=bookstore;charset=utf8mb4";
 $user = 'root';
 $pass = ''; 
@@ -24,37 +24,28 @@ try {
     $error = "Databasanslutning misslyckades: " . $e->getMessage();
 }
 
-// Steg 4: Hantera formulär när användaren skickar in det
+// Hantera formulär när användaren skickar in det
 // När användaren trycker på "Spara Bok" görs ett anrop till samma sida igen,
 // fast denna gången med POST-data. $_SERVER['REQUEST_METHOD'] === 'POST' kontrollerar
 // om det är ett POST-anrop (formulär skickat) eller GET-anrop (vanlig sidladdning)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     
-    // Hämta och rensa inmatning från formuläret
-    // filter_input() hämtar data från POST-anropet genom att specificera vilket fält vi vill ha
-    // t.ex. 'title' eller 'author_id'. Funktionen rensar också data för säkerhet
-    // (skyddar mot skadlig kod som användare kan försöka skicka in)
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    $author_id = filter_input(INPUT_POST, 'author_id', FILTER_SANITIZE_NUMBER_INT);
-    $yearPub = filter_input(INPUT_POST, 'year_pub', FILTER_SANITIZE_STRING);
-    $isbn = filter_input(INPUT_POST, 'isbn', FILTER_SANITIZE_STRING);
+    // Hämta inmatning från formuläret
+    // OBS: osäker metod, använd inte i riktiga projekt!
+    $title = $_POST['title'];
+    $author_id = $_POST['author_id'];
+    $yearPub = $_POST['year_pub'];
+    $isbn = $_POST['isbn'];
 
     // Validera att obligatoriska fält är ifyllda
     if (empty($title) || empty($author_id) || empty($isbn)) {
         $error = "Titel, författare och ISBN måste fyllas i.";
     } else {
         try {
-            // Steg 5: Lägg till boken i databasen
-            // Vi använder prepare() och execute() för säkerhet (skyddar mot SQL-injection)
-            // Istället för direkt string-interpolering (t.ex. "VALUES ('$title')") använder vi placeholders (?)
-            // Detta separerar SQL-koden från data, så att data alltid behandlas som data och inte som SQL-kod
-            $stmt = $pdo->prepare("INSERT INTO books (isbn, title, author_id, year_pub) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$isbn, $title, $author_id, $yearPub]);
-            
-            // OBS: Farligt sätt (direkt interpolering) - ANVÄND INTE I RIKTIGA PROJEKT!
-            // $sql = "INSERT INTO books (isbn, title, author_id, year_pub) VALUES ('$isbn', '$title', $author_id, '$yearPub')";
-            // $pdo->query($sql);
-
+            // Lägg till boken i databasen
+            // OBS: osäker metod, använd inte i riktiga projekt!
+            $sql = "INSERT INTO books (isbn, title, author_id, year_pub) VALUES ('$isbn', '$title', $author_id, '$yearPub')";
+            $pdo->query($sql);
             $success = "Boken '{$title}' lades till i databasen!";
 
         } catch (\PDOException $e) {
